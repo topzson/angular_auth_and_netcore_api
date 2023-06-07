@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "jUVVkm6OVBI2zoEaCGKjtkJjq2wcAEc+Ai9wsx055meBk3zbP0UHKDqL8snUDDVn3zJxP7BDNCRFo0JuqkC9oQ==",
+  "success": true,
+  "projectFilePath": "D:\\Workstation\\angular_auth_and_netcore_api\\angular_authAPI\\angular_authAPI\\angular_authAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Rattatammanoon.P\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Rattatammanoon.P\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Rattatammanoon.P\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\Rattatammanoon.P\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\Rattatammanoon.P\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\Rattatammanoon.P\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
