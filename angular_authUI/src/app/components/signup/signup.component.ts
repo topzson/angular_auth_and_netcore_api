@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import ValidateForm from 'src/app/heiper/validateform';
 
 @Component({
   selector: 'app-signup',
@@ -32,18 +33,11 @@ export class SignupComponent implements OnInit{
 
   onSignup(){
     if(this.signUpForm.valid){
-      console.log(this.signUpForm.value)
+      console.log(this.signUpForm.value);
+    }else{
+      ValidateForm.validateAllFormFileds(this.signUpForm);
     }
   }
 
-  private validateAllFormFileds(formGroup: FormGroup){
-    Object.keys(formGroup.controls).forEach(field=>{
-      const control = formGroup.get(field);
-      if(control instanceof FormControl){
-        control.markAsDirty({onlySelf:true});
-      }else if(control instanceof FormGroup){
-        this.validateAllFormFileds(control)
-      }
-    })
-  }
+
 }
