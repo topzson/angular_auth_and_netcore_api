@@ -1,4 +1,5 @@
 ﻿using angular_authAPI.Context;
+using angular_authAPI.Heiper;
 using angular_authAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,7 @@ namespace angular_authAPI.Controllers
                 .FirstOrDefaultAsync(x => x.Username == userObj.Username && x.Password == userObj.Password);
             if(user == null)
                 return NotFound(new { Message = "User Not Found!" });
+
             return Ok(new
             {
                 Message = "Login Success!"
@@ -34,6 +36,18 @@ namespace angular_authAPI.Controllers
         {
             if (userObj == null)
                 return BadRequest();
+            //CHeck username
+            if (await CheckUserNameExistAsync(userObj.Username))
+                return BadRequest(new { Message = "Username Already Exist!" });
+            //check email
+            if (await CheckEmailExistAsync(userObj.Email))
+                return BadRequest(new { Message = "Email Already Exist!" });
+            //check password
+
+
+            userObj.Password = PasswordHasher.HashPassword(userObj.Password);
+            userObj.Role = "User";
+            userObj.Token = "";
             await _authContext.Users.AddAsync(userObj);
             await _authContext.SaveChangesAsync();
             return Ok(new
@@ -41,5 +55,12 @@ namespace angular_authAPI.Controllers
                 Message = "User Registered!"
             });
         }
+
+
+        private Task<bool> CheckUserNameExistAsync(string username)
+            =>  _authContext.Users.AnyAsync(x => x.Username == username);
+
+        private Task<bool> CheckEmailExistAsync(string email)
+            => _authContext.Users.AnyAsync(x => x.Email == email);
     }
 }

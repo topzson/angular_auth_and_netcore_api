@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import ValidateForm from 'src/app/heiper/validateform';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -12,7 +14,7 @@ export class SignupComponent implements OnInit{
   isText: boolean = false;
   eyeIcon: string = "fa-eye-slash";
   signUpForm!: FormGroup;
-  constructor(private fb: FormBuilder){}
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router){}
 
   ngOnInit():void{
     this.signUpForm = this.fb.group({
@@ -33,6 +35,23 @@ export class SignupComponent implements OnInit{
 
   onSignup(){
     if(this.signUpForm.valid){
+      let signUpObj = {
+        ...this.signUpForm.value,
+        role:'',
+        token:''
+      }
+      this.auth.signUp(signUpObj).subscribe({
+        next:(res=>{
+          alert(res.message);
+          this.signUpForm.reset();
+          this.router.navigate(['login']);
+          
+
+        }),
+        error:(err=>{
+          alert(err?.error.message)
+        })
+      })
       console.log(this.signUpForm.value);
     }else{
       ValidateForm.validateAllFormFileds(this.signUpForm);
