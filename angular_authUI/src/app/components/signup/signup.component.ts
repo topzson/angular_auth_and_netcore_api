@@ -36,21 +36,20 @@ export class SignupComponent implements OnInit{
   onSignup(){
     if(this.signUpForm.valid){
       let signUpObj = {
-        ...this.signUpForm.value,
-        role:'',
-        token:''
+        ...this.signUpForm.value
       }
-      this.auth.signUp(signUpObj).subscribe({
+      this.auth.signUp(signUpObj)
+      .subscribe({
         next:(res=>{
           alert(res.message);
           this.signUpForm.reset();
           this.router.navigate(['login']);
+
         }),
         error:(err=>{
           alert(err?.error.message)
         })
       })
-      console.log(signUpObj);
     }else{
       ValidateForm.validateAllFormFileds(this.signUpForm);
     }

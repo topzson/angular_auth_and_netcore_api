@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import ValidateForm from 'src/app/heiper/validateform';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserStoreService } from 'src/app/services/user-store.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit{
   eyeIcon: string = "fa-eye-slash";
   loginForm!: FormGroup;
 
-  constructor(private fb: FormBuilder,private auth: AuthService,private router:Router, private toast:NgToastService) { }
+  constructor(private fb: FormBuilder,private auth: AuthService,private router:Router, private toast:NgToastService, private userStore: UserStoreService) { }
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       username: ['',Validators.required],
@@ -31,18 +32,17 @@ export class LoginComponent implements OnInit{
   }
   onLogin(){
     if(this.loginForm.valid){
-        let loginUpObj = {
-          ...this.loginForm.value,
-          
-          role:'',
-          token:''
-        }
-      console.log(loginUpObj)
+      console.log(this.loginForm.value);
       //send the obj
-      this.auth.login(loginUpObj).subscribe({
+      this.auth.login(this.loginForm.value).subscribe({
         next:(res)=>{
+          console.log(res.message);
           this.loginForm.reset();
-          this.auth.storeToken(res.token);
+          this.auth.storeToken(res.Token);
+          this.auth.storeRefreshToken(res.refreshToken);
+          const tokenPayload = this.auth.decodedToken();
+          this.userStore.setFullNameForStore(tokenPayload.name);
+          this.userStore.setRoleForStore(tokenPayload.role);
           this.toast.success({detail:"SUCCESS", summary:res.message, duration: 5000});
           this.router.navigate(['dashboard']);
         },

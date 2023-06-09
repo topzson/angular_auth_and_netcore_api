@@ -25,11 +25,12 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    NgToastModule
+    NgToastModule,
+  
   ],
   providers: [{
-    provide:HTTP_INTERCEPTORS,
-    useClass:TokenInterceptor,
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptor,
     multi:true
   }],
   bootstrap: [AppComponent]
