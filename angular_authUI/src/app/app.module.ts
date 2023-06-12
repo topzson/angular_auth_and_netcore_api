@@ -26,7 +26,6 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     FormsModule,
     HttpClientModule,
     NgToastModule,
-  
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

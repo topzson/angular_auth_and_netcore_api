@@ -65,3 +65,7 @@ D:\Workstation\angular_auth_and_netcore_api\angular_authAPI\angular_authAPI\obj\
 D:\Workstation\angular_auth_and_netcore_api\angular_authAPI\angular_authAPI\obj\Debug\net6.0\angular_authAPI.pdb
 D:\Workstation\angular_auth_and_netcore_api\angular_authAPI\angular_authAPI\obj\Debug\net6.0\angular_authAPI.genruntimeconfig.cache
 D:\Workstation\angular_auth_and_netcore_api\angular_authAPI\angular_authAPI\obj\Debug\net6.0\ref\angular_authAPI.dll
+D:\Workstation\angular_auth_and_netcore_api\angular_authAPI\angular_authAPI\bin\Debug\net6.0\MailKit.dll
+D:\Workstation\angular_auth_and_netcore_api\angular_authAPI\angular_authAPI\bin\Debug\net6.0\MimeKit.dll
+D:\Workstation\angular_auth_and_netcore_api\angular_authAPI\angular_authAPI\bin\Debug\net6.0\NETCore.MailKit.dll
+D:\Workstation\angular_auth_and_netcore_api\angular_authAPI\angular_authAPI\bin\Debug\net6.0\BouncyCastle.Crypto.dll

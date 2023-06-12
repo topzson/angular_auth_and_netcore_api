@@ -17,12 +17,15 @@ export class LoginComponent implements OnInit{
   eyeIcon: string = "fa-eye-slash";
   loginForm!: FormGroup;
 
+  public resetPasswordEmail!: string;
+  public isValidEmail!: boolean;
   constructor(private fb: FormBuilder,private auth: AuthService,private router:Router, private toast:NgToastService, private userStore: UserStoreService) { }
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       username: ['',Validators.required],
       password:['',Validators.required],
-    })
+    });
+    this.auth.signOut();
   }
 
   hideShowPass(){
@@ -38,7 +41,7 @@ export class LoginComponent implements OnInit{
         next:(res)=>{
           console.log(res.message);
           this.loginForm.reset();
-          this.auth.storeToken(res.Token);
+          this.auth.storeToken(res.accessToken);
           this.auth.storeRefreshToken(res.refreshToken);
           const tokenPayload = this.auth.decodedToken();
           this.userStore.setFullNameForStore(tokenPayload.name);
@@ -61,6 +64,20 @@ export class LoginComponent implements OnInit{
 
   }
 
+  checkValidEmail(event: string){
+    const value = event;
+    const pattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,3}$/;
+    this.isValidEmail = pattern.test(value);
+    return this.isValidEmail;
+  }
 
-
+  confirmToSend(){
+    if(this.checkValidEmail(this.resetPasswordEmail)){
+      console.log(this.resetPasswordEmail);
+      this.resetPasswordEmail="";
+      const buttonRef = document.getElementById("closeBtn");
+      buttonRef?.click();
+      //API call to be done.
+    }
+  }
 }

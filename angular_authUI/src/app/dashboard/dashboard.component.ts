@@ -9,8 +9,8 @@ import { UserStoreService } from '../services/user-store.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit{
-  public users:any =[];
-  public fullName: string ="";
+  public users:any = [];
+  public fullName: string = "";
   public role!:string;
   
   constructor(private api: ApiService,private auth:AuthService, private userStore:UserStoreService){}

@@ -28,7 +28,7 @@ export class AuthService {
   }
 
   storeToken(tokenValue: string){
-    localStorage.setItem('token', tokenValue)
+    localStorage.setItem('accessToken', tokenValue)
   }
 
   storeRefreshToken(tokenValue:string){
@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   getToken(){
-    return localStorage.getItem("token")
+    return localStorage.getItem("accessToken")
   }
 
   getRefreshToken(){
@@ -45,7 +45,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean{
-    return !!localStorage.getItem("token")
+    return !!localStorage.getItem("accessToken")
   }
 
   decodedToken(){

@@ -24,7 +24,7 @@ export class UserStoreService {
       return this.fullName$.asObservable();
     }
 
-    public setFullNameForStore(fullname:string){
-      this.fullName$.next(fullname);
+    public setFullNameForStore(test:string){
+      this.fullName$.next(test);
     }
 }
