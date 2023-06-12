@@ -29,8 +29,8 @@ namespace angular_authAPI.UtilityService
             {
                 try
                 {
-                    client.Connect(_config["EmailSettings:SmtpServer"], 456, true);
-                    client.Authenticate(_config["EMailSettings:From"], _config["EmailSettings:Password"]);
+                    client.Connect(_config["EmailSettings:SmtpServer"], 465, true);
+                    client.Authenticate(_config["EmailSettings:From"], _config["EmailSettings:Password"]);
                     client.Send(emailMessage);
                 }catch(Exception ex)
                 {

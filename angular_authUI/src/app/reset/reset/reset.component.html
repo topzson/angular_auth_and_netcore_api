@@ -1,0 +1,40 @@
+<div class="outer">
+    <div class="container">
+        <div class="row">
+            <div class="offset-md-2 col-lg-5 col-md-7 offser-lg-4 offset-md-3">
+                <div class="panel border bg-white">
+                    <div class="panel-heading">
+                        <h3 class="pt-3 font-weight-bold">Reset Password</h3>
+                    </div>
+                    <div class="panel-body p-3">
+                        <form [formGroup]="resetPasswordForm" (ngSubmit)="reset()">
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="resetPasswordForm.controls['password'].dirty && resetPasswordForm.hasError('required','password')">
+                                    <span class="fa fa-user p-2"></span>
+                                    <input formControlName="password" type="password" placeholder="New Password">
+                                </div>
+                            </div>
+                            <small *ngIf="resetPasswordForm.controls['password'].dirty && resetPasswordForm.hasError('required','password')" class="text-danger">*New Password is required</small>
+
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="resetPasswordForm.controls['confirmpassword'].dirty && resetPasswordForm.hasError('required','confirmpassword')">
+                                    <span class="fa fa-user p-2"></span>
+                                    <input formControlName="confirmpassword" type="password" placeholder="Confirm Password">
+                                </div>
+                            </div>
+                            <small *ngIf="resetPasswordForm.controls['confirmpassword'].dirty && resetPasswordForm.hasError('required','confirmpassword')" class="text-danger">*Confirm Password is required</small>
+                            <small *ngIf="resetPasswordForm.hasError('ConfirmPasswordValidator','confirmpassword')" class="text-danger">*Password didn't matched*</small>
+
+                            <button [disabled]="resetPasswordForm.invalid" type="submit"
+                                class="btn btn-primary btn-black mt-4 w-100">Reset</button>
+
+                            <div class="text-center pt-4 text-muted">Don't have account? <a id="forget" routerLink="/signup">Sign Up</a>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

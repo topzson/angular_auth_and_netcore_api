@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import ValidateForm from 'src/app/heiper/validateform';
+import { ResetPasswordService } from 'src/app/reset-password.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit{
 
   public resetPasswordEmail!: string;
   public isValidEmail!: boolean;
-  constructor(private fb: FormBuilder,private auth: AuthService,private router:Router, private toast:NgToastService, private userStore: UserStoreService) { }
+  constructor(private fb: FormBuilder,private auth: AuthService,private router:Router, private toast:NgToastService, private userStore: UserStoreService, private resetService: ResetPasswordService) { }
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       username: ['',Validators.required],
@@ -74,10 +75,29 @@ export class LoginComponent implements OnInit{
   confirmToSend(){
     if(this.checkValidEmail(this.resetPasswordEmail)){
       console.log(this.resetPasswordEmail);
-      this.resetPasswordEmail="";
-      const buttonRef = document.getElementById("closeBtn");
-      buttonRef?.click();
+  
       //API call to be done.
+
+      this.resetService.sendResetPassword(this.resetPasswordEmail).subscribe({
+        next:(res)=>{
+          this.toast.success({
+            detail:"Success",
+            summary: "Reset Success",
+            duration: 3000,
+          });
+          this.resetPasswordEmail = "";
+          const buttonRef = document.getElementById("closeBtn");
+          buttonRef?.click();
+        },
+        error:(err)=>{
+          this.toast.error({
+            detail:"ERROR",
+            summary: "Something went wrong",
+            duration: 3000,
+          });
+        }
+
+      })
     }
   }
 }
